@@ -24,14 +24,14 @@ try:
     from PyQt4.QtOpenGL import QGLFormat, QGLWidget
 
 except ImportError:
-    from PyQt5 import QtGui, QtCore
-    from PyQt5.QtCore import (Qt, QPointF, QRect, QRectF, QBuffer, QByteArray,
+    from PySide2 import QtGui, QtCore
+    from PySide2.QtCore import (Qt, QPointF, QRect, QRectF, QBuffer, QByteArray,
                               QThread, QIODevice, QMetaObject, QModelIndex, QObject, QRegExp, QSize,
-                              QSizeF,  QVariant) #QString
-    from PyQt5.QtSvg import QGraphicsSvgItem, QSvgGenerator
-    from PyQt5.QtOpenGL import QGLFormat, QGLWidget
-    from PyQt5.QtPrintSupport import QPrinter
-    from PyQt5.QtWidgets import (QAction, QApplication, QCheckBox, QWidget,
+                              QSizeF)#,  QVariant) #QString
+    from PySide2.QtSvg import QGraphicsSvgItem, QSvgGenerator
+    from PySide2.QtOpenGL import QGLFormat, QGLWidget
+    from PySide2.QtPrintSupport import QPrinter
+    from PySide2.QtWidgets import (QAction, QApplication, QCheckBox, QWidget,
                                  QColorDialog, QComboBox, QDialog, QDialogButtonBox, QFileDialog,
                                  QGraphicsEllipseItem, QGraphicsItem, QGraphicsItemGroup, QGraphicsLineItem,
                                  QGraphicsPathItem, QGraphicsPixmapItem, QGraphicsPolygonItem,
@@ -42,7 +42,7 @@ except ImportError:
                                  QVBoxLayout, QWidget)
 
 
-    from PyQt5.QtGui import (QBrush, QColor, QCursor, QFont, QFontMetrics,
+    from PySide2.QtGui import (QBrush, QColor, QCursor, QFont, QFontMetrics,
                              QIcon, QImage, QPainter, QPainterPath, QPen, QPixmap, QPolygonF,
                              QRadialGradient, QRegExpValidator, QStandardItemModel, QTransform)
 
@@ -68,10 +68,10 @@ except ImportError:
     # unk = []
     # for n in map(str.strip, names.split(",")):
     #     try:
-    #         exec "from PyQt5.QtGui import %s" %n
+    #         exec "from PySide2.QtGui import %s" %n
     #     except ImportError:
     #         try:
-    #             exec "from PyQt5.QtWidgets import %s" %n
+    #             exec "from PySide2.QtWidgets import %s" %n
     #         except:
     #             unk.append(n)
     #         else:
@@ -79,8 +79,8 @@ except ImportError:
     #     else:
     #         gui.append(n)
 
-    # print 'from PyQt5.QtWidgets import (%s)' %', '.join(widgets)
-    # print 'from PyQt5.QtGui import (%s)' %', '.join(gui)
-    # print 'from PyQt5.Unk import (%s)' %', '.join(unk)
-    
-    QtCore.pyqtSignature = QtCore.pyqtSlot
+    # print 'from PySide2.QtWidgets import (%s)' %', '.join(widgets)
+    # print 'from PySide2.QtGui import (%s)' %', '.join(gui)
+    # print 'from PySide2.Unk import (%s)' %', '.join(unk)
+
+    QtCore.pyqtSignature = QtCore.Slot

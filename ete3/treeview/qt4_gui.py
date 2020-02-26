@@ -178,7 +178,7 @@ class _GUI(QMainWindow):
         #self.check.start()
         #self.connect(self.check, SIGNAL("output(QString)"), self._updatestatus)
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionETE_triggered(self):
         try:
             __version__
@@ -192,31 +192,31 @@ class _GUI(QMainWindow):
         d._conf.version.setAlignment(Qt.AlignHCenter)
         d.exec_()
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionZoomOut_triggered(self):
         self.view.safe_scale(0.8,0.8)
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionZoomIn_triggered(self):
         self.view.safe_scale(1.2,1.2)
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionZoomInX_triggered(self):
         self.scene.img._scale += self.scene.img._scale * 0.05
         self.redraw()
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionZoomOutX_triggered(self):
         self.scene.img._scale -= self.scene.img._scale * 0.05
         self.redraw()
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionZoomInY_triggered(self):
         self.scene.img.branch_vertical_margin += 5
         self.scene.img._scale = None
         self.redraw()
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionZoomOutY_triggered(self):
         if self.scene.img.branch_vertical_margin > 0:
             margin = self.scene.img.branch_vertical_margin - 5
@@ -227,18 +227,18 @@ class _GUI(QMainWindow):
             self.scene.img._scale = None
             self.redraw()
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionFit2tree_triggered(self):
         self.view.fitInView(self.scene.sceneRect(), Qt.KeepAspectRatio)
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionFit2region_triggered(self):
         R = self.view.selector.rect()
         if R.width()>0 and R.height()>0:
             self.view.fitInView(R.x(), R.y(), R.width(),\
                                     R.height(), Qt.KeepAspectRatio)
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionSearchNode_triggered(self):
         setup = self.searchDialog._conf
         setup.attrValue.setFocus()
@@ -291,41 +291,41 @@ class _GUI(QMainWindow):
                                     R.height(), Qt.KeepAspectRatio)
 
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionClear_search_triggered(self):
         # This could be much more efficient
         for n in list(self.view.n2hl.keys()):
             self.scene.view.unhighlight_node(n)
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionBranchLength_triggered(self):
         self.scene.img.show_branch_length ^= True
         self.scene.img._scale = None
         self.redraw()
         self.view.centerOn(0,0)
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionBranchSupport_triggered(self):
         self.scene.img.show_branch_support ^= True
         self.scene.img._scale = None
         self.redraw()
         self.view.centerOn(0,0)
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionLeafName_triggered(self):
         self.scene.img.show_leaf_name ^= True
         self.scene.img._scale = None
         self.redraw()
         self.view.centerOn(0,0)
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionForceTopology_triggered(self):
         self.scene.img.force_topology ^= True
         self.scene.img._scale = None
         self.redraw()
         self.view.centerOn(0,0)
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionShow_newick_triggered(self):
         d = NewickDialog(self.scene.tree)
         d._conf = _show_newick.Ui_Newick()
@@ -333,22 +333,22 @@ class _GUI(QMainWindow):
         d.update_newick()
         d.exec_()
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionChange_orientation_triggered(self):
         self.scene.props.orientation ^= 1
         self.redraw()
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionShow_phenogram_triggered(self):
         self.scene.props.style = 0
         self.redraw()
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionShowCladogram_triggered(self):
         self.scene.props.style = 1
         self.redraw()
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionOpen_triggered(self):
         d = QFileDialog()
         d._conf = _open_newick.Ui_OpenNewick()
@@ -367,7 +367,7 @@ class _GUI(QMainWindow):
             self.img = TreeStyle()
             self.redraw()
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionSave_newick_triggered(self):
         fname = QFileDialog.getSaveFileName(self ,"Save File",
                                                  "/home",
@@ -381,7 +381,7 @@ class _GUI(QMainWindow):
             OUT.write(nw)
             OUT.close()
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionRenderPDF_triggered(self):
         F = QFileDialog(self)
         if F.exec_():
@@ -391,7 +391,7 @@ class _GUI(QMainWindow):
             save(self.scene, imgName)
 
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionRender_selected_region_triggered(self):
         if not self.scene.selector.isVisible():
             return QMessageBox.information(self, "!",\
@@ -405,7 +405,7 @@ class _GUI(QMainWindow):
             save(imgName, take_region=True)
 
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def on_actionPaste_newick_triggered(self):
         text,ok = QInputDialog.getText(self,\
                                                  "Paste Newick",\
@@ -542,7 +542,7 @@ class _PropertiesDialog(QWidget):
             #    "currentIndexChanged(const QString&)"), self.handleModelButton)
 
             self.combo.currentIndexChanged.connect(self.handleModelButton)
-            
+
             self.model_lbl = QLabel('Available models: ', self)
             self.layout.addWidget(self.model_lbl)
 
